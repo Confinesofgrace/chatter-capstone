@@ -11,11 +11,16 @@ const router = useRouter();
 const loginUser = async (event: Event) => {
   event.preventDefault();
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value);
-    router.push('/loggedin'); // Redirect to LoggedIn component after login
-  } catch (error) {
+  await signInWithEmailAndPassword(auth, email.value, password.value);
+  router.push('/loggedin'); // Redirect to LoggedIn component after login
+} catch (error) {
+  if (error instanceof Error) {
     console.error("Error logging in:", error.message);
+  } else {
+    console.error("Unknown error logging in:", error);
   }
+}
+
 };
 </script>
 
