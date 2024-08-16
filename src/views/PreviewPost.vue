@@ -47,14 +47,16 @@ const postImageUrl = computed(() => postImage.value); // Ensure the value is a s
   padding: 20px;
 }
 
-#postImage-preview img {
+#postImage-preview img 
+{
   width: 100%;
   border-radius: 8px;
   max-height: 200px;
   object-fit: cover;
 }
 
-button {
+button 
+{
   margin-bottom: 20px;
   padding: 8px 16px;
   border: none;
@@ -64,7 +66,8 @@ button {
   border-radius: 16px;
 }
 
-button:hover {
+button:hover 
+{
   background-color: #3700b3;
 }
 </style>

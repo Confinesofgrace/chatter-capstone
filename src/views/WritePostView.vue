@@ -22,13 +22,16 @@
         placeholder="Write your post here..."
         id="post-input"
       ></textarea>
-      <div id="editor-actions">
+      <div style="background-Color:yellow; display:flex; align-items:center;">
         <RouterLink
           :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imageQuery } }"
         >
-          <div>Preview Post</div>
+          <button>Preview Post</button>
         </RouterLink>
-        <div @click="publishPost">Publish Post</div>
+
+        
+
+        <button @click="publishPost">Publish Post</button>
       </div>
     </div>
   </div>
@@ -85,12 +88,14 @@ const publishPost = async () => {
 </script>
 
 <style scoped>
-#editor-frame {
+#editor-frame 
+{
   display: flex;
   justify-content: center;
 }
 
-#editor-display {
+#editor-display 
+{
   width: 80%;
   padding: 20px;
   display: flex;
@@ -99,7 +104,8 @@ const publishPost = async () => {
   background-color: whitesmoke;
 }
 
-#title-input {
+#title-input 
+{
   width: 80%;
   padding: 10px;
   margin-bottom: 20px;
@@ -108,11 +114,13 @@ const publishPost = async () => {
   border-radius: 6px;
 }
 
-#title-input:focus {
+#title-input:focus 
+{
   outline: none;
 }
 
-#post-input {
+#post-input 
+{
   width: 80%;
   height: 300px;
   padding: 10px;
@@ -122,17 +130,15 @@ const publishPost = async () => {
   resize: vertical;
 }
 
-#post-input:focus {
+#post-input:focus 
+{
   outline: none;
 }
 
-#editor-actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 100px;
-}
-
-button {
+button 
+{
+  margin-bottom: 20px;
+  padding: 8px 16px;
   border: none;
   background-color: #6200ee;
   color: white;
@@ -140,7 +146,8 @@ button {
   border-radius: 16px;
 }
 
-button:hover {
+button:hover 
+{
   background-color: #3700b3;
 }
 
