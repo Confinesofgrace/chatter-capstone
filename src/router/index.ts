@@ -50,6 +50,32 @@ const router = createRouter({
       component: () => import('../views/WritePost.vue')
     },
 
+    {
+      path: '/previewpost',
+      name: 'previewpost',
+      component: () => import('../views/PreviewPost.vue')
+      
+    },
+
+    {
+      path: '/myposts',
+      name: 'myposts',
+      component: () => import('../views/MyPosts.vue')
+    },
+    
+    {
+      path: '/sidebar',
+      name: 'sidebar',
+      component: () => import('../views/sidebar.vue')
+    },
+
+    {
+      path: '/recommended',
+      name: 'Recommended',
+      component: () => import('../views/Recommended.vue')
+    },
+
+
   ]
 })
 

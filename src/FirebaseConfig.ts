@@ -3,14 +3,20 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCXI--fmdXnXm0uaxmGGjx3EE2ic9T7uwY",
-  authDomain: "chatter-blog-1-project.firebaseapp.com",
-  projectId: "chatter-blog-1-project",
-  storageBucket: "chatter-blog-1-project.appspot.com",
-  messagingSenderId: "604234446388",
-  appId: "1:604234446388:web:ddaae7fefe77b4cdc83c61"
-};
 
+  apiKey: "AIzaSyBZf9rfgu3N97G2XM7UfWpVJzrUYPqptaQ",
+
+  authDomain: "chatter-capstone-6a093.firebaseapp.com",
+
+  projectId: "chatter-capstone-6a093",
+
+  storageBucket: "chatter-capstone-6a093.appspot.com",
+
+  messagingSenderId: "525482384528",
+
+  appId: "1:525482384528:web:d3238d28152537026c8c15"
+
+};
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

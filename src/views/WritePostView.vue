@@ -3,7 +3,7 @@
     <div id="editor-display">
       <div id="image-for-post">
         <label htmlFor="imageInput">
-          <p><b>Insert post image</b></p>
+          <p id="insert-image"><b>Insert post image</b></p>
         </label>
         <input type="file" id="imageInput" @change="handleImageUpload" />
         <div v-if="imagePreview" class="image-preview">
@@ -23,15 +23,12 @@
         id="post-input"
       ></textarea>
       <div id="editor-actions">
-        <button @click="showPreview">Preview</button>
+        <RouterLink
+          :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imagePreview }}"
+        >
+          <button>Preview</button>
+        </RouterLink>
         <button @click="publishPost">Publish</button>
-      </div>
-      <div v-if="showingPreview" id="preview-container">
-        <h2>{{ title }}</h2>
-        <div v-html="postContent"></div>
-        <div v-if="imagePreview" class="image-preview">
-          <img :src="imagePreview" alt="Post Image" />
-        </div>
       </div>
     </div>
   </div>
@@ -39,25 +36,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/firebaseConfig'; // Adjust the path to your Firebase config
 
 const title = ref('');
 const postContent = ref('');
-const showingPreview = ref(false);
 const imagePreview = ref<string | ArrayBuffer | null>(null);
-
-const showPreview = () => {
-  showingPreview.value = true;
-};
-
-const publishPost = () => {
-  // Handle publishing logic (e.g., save to database)
-  console.log('Publishing Post:', { title: title.value, content: postContent.value });
-  // Optionally reset the input fields
-  title.value = '';
-  postContent.value = '';
-  imagePreview.value = null;
-  showingPreview.value = false;
-};
+const router = useRouter();
 
 const handleImageUpload = (event: Event) => {
   const input = event.target as HTMLInputElement;
@@ -66,17 +52,33 @@ const handleImageUpload = (event: Event) => {
     const reader = new FileReader();
     reader.onload = () => {
       imagePreview.value = reader.result;
-      // Optionally, you could also insert the image into the post content here
     };
     reader.readAsDataURL(file);
   }
 };
+
+const publishPost = async () => {
+  try {
+    // Add the post to Firestore
+    await addDoc(collection(db, 'posts'), {
+      title: title.value,
+      content: postContent.value,
+      image: imagePreview.value,
+      createdAt: new Date(),
+    });
+    // Redirect to MyPosts after publishing
+    router.push('/myposts');
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
 </script>
+
 
 <style scoped>
 #editor-frame 
 {
-  padding: 120px 40px;
+  
   display: flex;
   justify-content: center;
 }
@@ -88,12 +90,10 @@ const handleImageUpload = (event: Event) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-color: whitesmoke;
 }
 
-#title-input 
-{
+#title-input {
   width: 80%;
   padding: 10px;
   margin-bottom: 20px;
@@ -102,13 +102,11 @@ const handleImageUpload = (event: Event) => {
   border-radius: 6px;
 }
 
-#title-input:focus 
-{
+#title-input:focus {
   outline: none;
 }
 
-#post-input 
-{
+#post-input {
   width: 80%;
   height: 300px;
   padding: 10px;
@@ -118,20 +116,17 @@ const handleImageUpload = (event: Event) => {
   resize: vertical;
 }
 
-#post-input:focus 
-{
+#post-input:focus {
   outline: none;
 }
 
-#editor-actions 
-{
+#editor-actions {
   margin-top: 20px;
   display: flex;
   gap: 100px;
 }
 
-button 
-{
+button {
   padding: 8px 16px;
   border: none;
   background-color: #6200ee;
@@ -140,30 +135,32 @@ button
   border-radius: 16px;
 }
 
-button:hover 
-{
+button:hover {
   background-color: #3700b3;
 }
 
-
-#image-for-post
-{
-    width: 80%;
+#image-for-post {
+  width: 80%;
 }
 
-#imageInput
-{
-    display: none;
+#imageInput {
+  display: none;
 }
 
 
-.image-preview 
-{
+
+#insert-image {
+  width: 22%;
+  margin-bottom: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.image-preview {
   margin: 10px 0px;
 }
 
-.image-preview img 
-{
+.image-preview img {
   width: 100%;
   border-radius: 8px;
   max-height: 200px;
