@@ -63,11 +63,6 @@ const router = createRouter({
       component: () => import('../views/MyPosts.vue')
     },
     
-    {
-      path: '/sidebar',
-      name: 'sidebar',
-      component: () => import('../views/Sidebar.vue')
-    },
 
     {
       path: '/recommended',
