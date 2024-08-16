@@ -1,35 +1,45 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../FirebaseConfig'; 
+
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+
+const loginUser = async (event: Event) => {
+  event.preventDefault();
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    router.push('/loggedin'); // Redirect to LoggedIn component after login
+  } catch (error) {
+    console.error("Error logging in:", error.message);
+  }
+};
+</script>
+
+
 <template>
-    <div id="login-frame"> 
-        <div id="login-display"> 
-
-            
-
-            <form> 
-
-                <div> <h2> Log In With Your Email </h2>  </div>
-
-                <div id='inputs'>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" v-model="email" required  placeholder="johnny@email.com"/>
-                        
-                </div>
-
-                <div id='inputs'>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" v-model="password" required />
-                </div>
-
-                <p> Don't have an account? <RouterLink to= "/signup"><b>Sign Up</b> </RouterLink> </p>
-                <div id="for-btns"> Log In </div>
-
-            </form>
-
-            
-
-
+  <div id="login-frame"> 
+    <div id="login-display">
+      <form @submit="loginUser">
+        <div><h2>Log In With Your Email</h2></div>
+        <div id='inputs'>
+          <label for="email">Email:</label>
+          <input type="email" id="email" v-model="email" required placeholder="johnny@email.com" />
         </div>
+        <div id='inputs'>
+          <label for="password">Password:</label>
+          <input type="password" id="password" v-model="password" required />
+        </div>
+        <p>Don't have an account? <RouterLink to="/signup"><b>Sign Up</b></RouterLink></p>
+        <button id="for-btns" type="submit">Log In</button>
+      </form>
     </div>
+  </div>
 </template>
+
 
 <style scoped>
 #login-frame
@@ -105,22 +115,31 @@ label
     margin: 4px 0px;
 }
 
-#for-btns
+
+button#for-btns 
 {
     background-color: rgb(162, 0, 255);
 
     width: 30%;
     display: flex;
     justify-content: center;
-
-    padding: 8px;
-
-    border-radius: 12px;
-
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
     
+    padding: 8px;
+    
+    border-radius: 12px;
+    
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
 }
+
+button#for-btns:hover 
+{
+    background-color: rgb(120, 0, 190);
+}
+
+
 
 </style>

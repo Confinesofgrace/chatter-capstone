@@ -1,54 +1,81 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { auth } from '../FirebaseConfig'; // Ensure the correct path
+import { onAuthStateChanged } from 'firebase/auth';
 
-
-import { ref } from 'vue';
-
+const isLoggedIn = ref(false);
 const isOpen = ref(false);
 
 const toggleNavbar = () => {
   isOpen.value = !isOpen.value;
 };
 
+// Check authentication status on mount
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user;
+  });
+});
 </script>
 
 
-<template>  
-      
-    <div id="navbar1">
-
-        <div id="logo"> 
-            <h2> Chatter </h2>
+<template>
+  <div>
+    <div v-if="isLoggedIn">
+      <!-- Navbar2 for logged-in users -->
+      <div id="navbar2">
+        
+        <div id="logo">
+          <RouterLink to="/loggedin"> <h2>Chatter</h2> </RouterLink>
         </div>
 
         <div id="menu">
-            <div id="hamburger" @click="toggleNavbar">
-                &#9776;
-            </div>
+          <div id="hamburger" @click="toggleNavbar">
+            &#9776;
+          </div>
         </div>
 
-        <div id="nav-center" :class="{ open: isOpen }"> 
-            <RouterLink to="/"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
-            <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
-            <RouterLink to="/contact"><div id="navs" @click="toggleNavbar">Contact</div></RouterLink>
-            <RouterLink to="/login"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
+        <div id="nav-center" :class="{ open: isOpen }">
+          <RouterLink to="/loggedin"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
+          <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
+          <RouterLink to="/contact"><div id="navs" @click="toggleNavbar">Contact</div></RouterLink>
+          <RouterLink to="/write"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
 
-            <div id="notification"> </div>
-            <div id="profile-pic"> </div>
-
-      
+          <div id="searchbar">  </div>
+          <div id="notification"> </div>
+          <div id="profile-pic"> </div>
         </div>
-        
-
+      </div>
     </div>
 
+    <div v-else>
+      <!-- Navbar1 for non-logged-in users -->
+      <div id="navbar2">
+        <div id="logo">
+          <h2>Chatter</h2>
+        </div>
 
 
+        <div id="menu">
+          <div id="hamburger" @click="toggleNavbar">
+            &#9776;
+          </div>
+        </div>
 
+        <div id="nav-center" :class="{ open: isOpen }">
+          <RouterLink to="/"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
+          <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
+          <RouterLink to="/contact"><div id="navs" @click="toggleNavbar">Contact</div></RouterLink>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
 <style scoped>
-#navbar1 
+#navbar2 
 {
   padding: 20px 120px;
   display: flex;

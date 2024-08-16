@@ -1,40 +1,55 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../FirebaseConfig'; // Ensure the path is correct
+
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const error = ref('');
+const router = useRouter();
+
+const signUp = async () => {
+  if (password.value !== confirmPassword.value) {
+    error.value = "Passwords do not match!";
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email.value, password.value);
+    router.push('/login'); // Redirect to login after successful signup
+  } catch (err) {
+    error.value = err.message;
+  }
+};
+</script>
+
 <template>
     <div id="signup-frame"> 
         <div id="signup-display"> 
-
-            
-
-            <form> 
-
+            <form @submit.prevent="signUp"> 
                 <div> <h2> Sign Up With Your Email </h2>  </div>
-
                 <div id='inputs'>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" v-model="email" required  placeholder="johnny@email.com"/>
-                        
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" v-model="email" required  placeholder="johnny@email.com"/>
                 </div>
-
                 <div id='inputs'>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" v-model="password" required />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" v-model="password" required />
                 </div>
-
                 <div id='inputs'>
-                        <label for="password">Confirm Password:</label>
-                        <input type="password" id="password" v-model="password" required />
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" v-model="confirmPassword" required />
                 </div>
-
-                <p> Already have an account? <RouterLink to= "/login"><b>Log In</b> </RouterLink> </p>
-                <div id="for-btns"> Sign UP </div>
-
+                <p v-if="error">{{ error }}</p>
+                <p> Already have an account? <RouterLink to="/login"><b>Log In</b></RouterLink> </p>
+                <button id="for-btns" type="submit"> Sign Up </button>
             </form>
-
-            
-
-
         </div>
     </div>
 </template>
+
 
 <style scoped>
 #signup-frame
@@ -110,22 +125,28 @@ label
     margin: 4px 0px;
 }
 
-#for-btns
+button#for-btns 
 {
     background-color: rgb(162, 0, 255);
 
     width: 30%;
     display: flex;
     justify-content: center;
-
-    padding: 8px;
-
-    border-radius: 12px;
-
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
     
+    padding: 8px;
+    
+    border-radius: 12px;
+    
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+button#for-btns:hover 
+{
+    background-color: rgb(120, 0, 190);
 }
 
 </style>
