@@ -1,10 +1,12 @@
 <template>
   <div id="preview-frame">
     <div id="preview-display">
-      <RouterLink to="/writepost"><button>Back to draft</button></RouterLink>
+      <RouterLink to="/writepost">
+        <button>Back to draft</button>
+      </RouterLink>
       
-      <div v-if="postImage" id="postImage-preview">
-        <img :src="postImage" alt="Post Image Preview" />
+      <div v-if="postImageUrl" id="postImage-preview">
+        <img :src="postImageUrl" alt="Post Image Preview" />
       </div>
       <div id="title-preview">
         <h2>{{ postTitle }}</h2>
@@ -17,15 +19,21 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-const postTitle = route.query.title || '';
-const postContent = route.query.content || '';
-const postImage = route.query.image || '';
-</script>
+// Ensure values are strings and handle type inconsistencies
+const postTitle = computed(() => route.query.title as string || '');
+const postContent = computed(() => route.query.content as string || '');
+const postImage = computed(() => {
+  const image = route.query.image;
+  return typeof image === 'string' ? image : ''; // Ensure postImage is a string
+});
 
+const postImageUrl = computed(() => postImage.value); // Ensure the value is a string
+</script>
 
 <style scoped>
 #preview-frame {
@@ -35,7 +43,6 @@ const postImage = route.query.image || '';
 }
 
 #preview-display {
-  
   width: 80%;
   padding: 20px;
 }

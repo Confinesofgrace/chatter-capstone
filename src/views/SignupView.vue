@@ -20,8 +20,9 @@ const signUp = async () => {
     await createUserWithEmailAndPassword(auth, email.value, password.value);
     router.push('/login'); // Redirect to login after successful signup
   } catch (err) {
-    error.value = err.message;
-  }
+  const errorMessage = (err as Error).message;
+  error.value = errorMessage;
+}
 };
 </script>
 

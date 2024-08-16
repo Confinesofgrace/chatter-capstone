@@ -7,7 +7,7 @@
         </label>
         <input type="file" id="imageInput" @change="handleImageUpload" />
         <div v-if="imagePreview" class="image-preview">
-          <img :src="imagePreview" alt="Post Image Preview" />
+          <img :src="imagePreviewUrl" alt="Post Image Preview" />
         </div>
       </div>
 
@@ -24,7 +24,7 @@
       ></textarea>
       <div id="editor-actions">
         <RouterLink
-          :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imagePreview }}"
+          :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imageQuery } }"
         >
           <div>Preview Post</div>
         </RouterLink>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../FirebaseConfig'; 
@@ -57,13 +57,23 @@ const handleImageUpload = (event: Event) => {
   }
 };
 
+// Compute the image URL for the preview
+const imagePreviewUrl = computed(() => {
+  return typeof imagePreview.value === 'string' ? imagePreview.value : '';
+});
+
+// Compute the image query parameter
+const imageQuery = computed(() => {
+  return typeof imagePreview.value === 'string' ? imagePreview.value : '';
+});
+
 const publishPost = async () => {
   try {
     // Add the post to Firestore
     await addDoc(collection(db, 'posts'), {
       title: title.value,
       content: postContent.value,
-      image: imagePreview.value,
+      image: imagePreviewUrl.value,
       createdAt: new Date(),
     });
     // Redirect to MyPosts after publishing
@@ -74,17 +84,13 @@ const publishPost = async () => {
 };
 </script>
 
-
 <style scoped>
-#editor-frame 
-{
-  
+#editor-frame {
   display: flex;
   justify-content: center;
 }
 
-#editor-display 
-{
+#editor-display {
   width: 80%;
   padding: 20px;
   display: flex;
@@ -120,16 +126,13 @@ const publishPost = async () => {
   outline: none;
 }
 
-#editor-actions 
-{
+#editor-actions {
   margin-top: 20px;
   display: flex;
   gap: 100px;
 }
 
-button 
-{
-  
+button {
   border: none;
   background-color: #6200ee;
   color: white;
@@ -137,21 +140,17 @@ button
   border-radius: 16px;
 }
 
-button:hover 
-{
+button:hover {
   background-color: #3700b3;
 }
 
-#image-for-post 
-{
+#image-for-post {
   width: 80%;
 }
 
 #imageInput {
   display: none;
 }
-
-
 
 #insert-image {
   width: 22%;
