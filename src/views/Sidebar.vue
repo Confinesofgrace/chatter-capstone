@@ -21,13 +21,13 @@ export default defineComponent({
         <div id="footer" style="font-size: 12px; display: flex; justify-content: center; gap: 5%;">
             <p>Help</p>
 
-            <RouterLink to="/loggedin/about">
+            <RouterLink to="/about">
                 <p style="cursor: pointer;">About</p>
             </RouterLink>
             
             <p>Contact</p>
             
-            <RouterLink to="/loggedin/terms">
+            <RouterLink to="terms">
                 <p>Terms</p>
             </RouterLink>
         </div>
