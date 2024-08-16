@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '@/firebaseConfig'; // Adjust the path to your Firebase config
+import { db } from '../FirebaseConfig'; // Adjust the path to your Firebase config
 
 const posts = ref([]);
 
