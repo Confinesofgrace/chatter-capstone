@@ -38,8 +38,8 @@ onMounted(() => {
         <div id="nav-center" :class="{ open: isOpen }">
           <RouterLink to="/loggedin"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
           <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
-          <RouterLink to="/contact"><div id="navs" @click="toggleNavbar">Contact</div></RouterLink>
-          <RouterLink to="/write"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
+          <RouterLink to="/myposts"><div id="navs" @click="toggleNavbar">My Posts</div></RouterLink>
+          <RouterLink to="/writepost"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
 
           <div id="searchbar">  </div>
           <div id="notification"> </div>
