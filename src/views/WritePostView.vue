@@ -26,9 +26,9 @@
         <RouterLink
           :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imagePreview }}"
         >
-          <button>Preview</button>
+          <div>Preview Post</div>
         </RouterLink>
-        <button @click="publishPost">Publish</button>
+        <div @click="publishPost">Publish Post</div>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '@/firebaseConfig'; // Adjust the path to your Firebase config
+import { db } from '../FirebaseConfig'; 
 
 const title = ref('');
 const postContent = ref('');
@@ -120,14 +120,16 @@ const publishPost = async () => {
   outline: none;
 }
 
-#editor-actions {
+#editor-actions 
+{
   margin-top: 20px;
   display: flex;
   gap: 100px;
 }
 
-button {
-  padding: 8px 16px;
+button 
+{
+  
   border: none;
   background-color: #6200ee;
   color: white;
@@ -135,11 +137,13 @@ button {
   border-radius: 16px;
 }
 
-button:hover {
+button:hover 
+{
   background-color: #3700b3;
 }
 
-#image-for-post {
+#image-for-post 
+{
   width: 80%;
 }
 
