@@ -75,6 +75,12 @@ const router = createRouter({
       component: () => import('../views/Recommended.vue')
     },
 
+    {
+      path: '/terms',
+      name: 'Terms',
+      component: () => import('../views/TermsView.vue')
+    },
+
 
   ]
 })
