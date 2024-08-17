@@ -29,8 +29,6 @@
           <button>Preview Post</button>
         </RouterLink>
 
-        
-
         <button @click="publishPost">Publish Post</button>
       </div>
     </div>
