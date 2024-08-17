@@ -22,7 +22,7 @@
         placeholder="Write your post here..."
         id="post-input"
       ></textarea>
-      <div style="background-Color:yellow; display:flex; align-items:center;">
+      <div style=" display:flex; align-items:center;">
         <RouterLink
           :to="{ path: '/previewpost', query: { title: title, content: postContent, image: imageQuery } }"
         >
