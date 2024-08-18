@@ -24,15 +24,15 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
-// Ensure values are strings and handle type inconsistencies
+
 const postTitle = computed(() => route.query.title as string || '');
 const postContent = computed(() => route.query.content as string || '');
 const postImage = computed(() => {
   const image = route.query.image;
-  return typeof image === 'string' ? image : ''; // Ensure postImage is a string
+  return typeof image === 'string' ? image : ''; 
 });
 
-const postImageUrl = computed(() => postImage.value); // Ensure the value is a string
+const postImageUrl = computed(() => postImage.value); 
 </script>
 
 <style scoped>

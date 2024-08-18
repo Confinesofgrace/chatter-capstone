@@ -149,26 +149,31 @@ button:hover
   background-color: #3700b3;
 }
 
-#image-for-post {
+#image-for-post 
+{
   width: 80%;
 }
 
-#imageInput {
+#imageInput 
+{
   display: none;
 }
 
-#insert-image {
+#insert-image 
+{
   width: 22%;
   margin-bottom: 4px;
   cursor: pointer;
   font-size: 20px;
 }
 
-.image-preview {
+.image-preview 
+{
   margin: 10px 0px;
 }
 
-.image-preview img {
+.image-preview img 
+{
   width: 100%;
   border-radius: 8px;
   max-height: 200px;
