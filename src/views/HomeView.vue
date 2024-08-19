@@ -45,7 +45,7 @@
 
     #hero-title
     {
-        font-size: 80px;
+        font-size: 60px;
         font-weight: 700;
         
     }
