@@ -22,7 +22,7 @@ const fetchPosts = async () => {
         id: doc.id,
         title: data.title,
         content: data.content,
-        image: data.image // Use optional chaining if image might not be present
+        image: data.image 
       };
       posts.value.push(post);
     });
