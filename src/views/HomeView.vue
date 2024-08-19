@@ -1,7 +1,7 @@
 <template>
   <div id="home-frame">
     <div id="home-display">
-      <div id="hero" style="width: 60%; padding:60px 0px">
+      <div id="hero" style="width: 70%; padding:60px 0px">
         <p id="hero-title">Get your Tech career running quickly...</p>
         <p id="hero-tag">
           'Tech' is very broad, but we provide the resources to get you going in the right direction quickly.
@@ -45,7 +45,7 @@
 
     #hero-title
     {
-        font-size: 60px;
+        font-size: 80px;
         font-weight: 700;
         
     }
