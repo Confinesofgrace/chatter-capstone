@@ -118,7 +118,8 @@ onMounted(() => {
   font-size: 14px;
 }
 
-#navs:hover {
+#navs:hover 
+{
   border-color: rgba(162, 0, 255, 0.507);
 }
 
@@ -139,10 +140,10 @@ onMounted(() => {
   {
     display: flex;
     justify-content: flex-end;
-    width: 35%;
+    
     position: absolute;
     right: 100px;
-    bottom: 10px;
+    bottom: 30px;
     margin: 8px 0px;
 
   }
@@ -153,7 +154,8 @@ onMounted(() => {
     cursor: pointer;
   }
 
-  nav {
+  nav 
+  {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -170,11 +172,11 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #e9e6e6;
+    background-color: #e9e6e6ee;
     position: absolute;
-    top: 70px;
-    left: 0px;
-    width: 100%;
+    top: 125px;
+    left: 120px;
+    
     z-index: 1;
   }
 }

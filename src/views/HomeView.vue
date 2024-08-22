@@ -6,6 +6,8 @@
         <p id="hero-tag">
           'Tech' is very broad, but we provide the resources to get you going in the right direction quickly.
         </p>
+
+        <RouterLink to= "/signup"> <div id="signup-btn">Sign Up</div> </RouterLink>
       </div>
     </div>
   </div>
@@ -37,7 +39,7 @@
 
     #home-display
     {
-      padding: 120px 40px;
+      padding: 120px 40px 50px 40px;
 
       /* Used this backgroud layer as a screen- enhance legibility and aesthetics*/
       background-color: rgba(0, 0, 0, 0.623);
@@ -58,6 +60,25 @@
     #hero p
     {
       color: white;
+    }
+
+    #signup-btn
+    {
+      width: 120px;
+      padding: 10px;
+      border: solid 1px;
+      border-color: rgba(162, 0, 255, 0);
+      border-radius: 50px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background-color: rgba(162, 0, 255, 0.685);
+      cursor: pointer;
+
+      color: whitesmoke;
+      font-size: 14px;
     }
 
     #footer
