@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { auth } from '../FirebaseConfig'; // Ensure the correct path
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'vue-router';
 
 const isLoggedIn = ref(false);
 const isOpen = ref(false);
+const router = useRouter();
 
 const toggleNavbar = () => {
   isOpen.value = !isOpen.value;
@@ -16,6 +18,18 @@ onMounted(() => {
     isLoggedIn.value = !!user;
   });
 });
+
+const logout = async () => {
+
+  try {
+        await signOut(auth);
+        isLoggedIn.value = false;
+        router.push ('/');
+      } catch (error) {
+                        console.error ('Error signing out:', error );
+                      }
+}
+
 </script>
 
 
@@ -40,6 +54,7 @@ onMounted(() => {
           <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
           <RouterLink to="/myposts"><div id="navs" @click="toggleNavbar">My Posts</div></RouterLink>
           <RouterLink to="/writepost"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
+          <div id="navs" @click="logout">Log Out</div>
 
           <div id="searchbar">  </div>
           <div id="notification"> </div>
@@ -63,9 +78,10 @@ onMounted(() => {
         </div>
 
         <div id="nav-center" :class="{ open: isOpen }">
-          <RouterLink to="/"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
+          <RouterLink to="/loggedin"> <div id="navs" @click="toggleNavbar">Home</div></RouterLink>
           <RouterLink to="/about"><div id="navs" @click="toggleNavbar">About</div></RouterLink>
           <RouterLink to="/contact"><div id="navs" @click="toggleNavbar">Contact</div></RouterLink>
+          <RouterLink to="/"><div id="navs" @click="toggleNavbar">Log Out</div></RouterLink>
           
         </div>
       </div>
