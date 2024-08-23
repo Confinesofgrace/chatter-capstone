@@ -58,7 +58,7 @@ const logout = async () => {
 
           <div id="searchbar">  </div>
           <div id="notification"> </div>
-          <div id="profile-pic"> </div>
+          <RouterLink to="/settings"><div id="profile-pic"> Update Profile </div></RouterLink>
         </div>
       </div>
     </div>

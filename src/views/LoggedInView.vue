@@ -59,6 +59,7 @@ export default defineComponent({
                         :class="{ active: activeFeed === 'forYou' }"
                     >
                         For You
+
                     </div>
                     <div 
                         id="feed" 
@@ -66,6 +67,7 @@ export default defineComponent({
                         :class="{ active: activeFeed === 'myPosts' }"
                     >
                         My Posts
+
                     </div>
 
                     <!-- Dynamically add selected interests as part of the nav -->
@@ -85,7 +87,10 @@ export default defineComponent({
                     <!-- Add content or components based on selected interest -->
                 </div>
             </div>
+            
             <hr style="margin:50px">
+
+
             <div id="sidebar" style="width:30%;">
                 <div id="footer" style="display:flex; width:100%; justify-content:center; align-items:center; gap:50px; font-size:12px;"> 
                     <RouterLink to="/about"> <p>About </p> </RouterLink>
@@ -124,25 +129,28 @@ export default defineComponent({
 
 #feed 
 {
-    background-color: whitesmoke;
+    
     padding: 8px;
     margin: 8px;
 
-    border-radius: 10px;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-direction: column;
+    justify-content: center;
+
+    color: black;
+    transition: color 0.3s ease, color 0.3s ease;
 }
 
 #feed.active 
 {
-    background-color: #d4edda; 
-    color: #371557;            
-    
+    font-weight: 700;
+    color: #371557; 
+
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.055); 
 }
+
 
 #feed i {
     margin-right: 2px;    
