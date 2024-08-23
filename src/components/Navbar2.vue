@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { auth } from '../FirebaseConfig'; // Ensure the correct path
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { Icon } from '@iconify/vue';
 
 const isLoggedIn = ref(false);
 const isOpen = ref(false);
@@ -56,9 +57,11 @@ const logout = async () => {
           <RouterLink to="/writepost"><div id="navs" @click="toggleNavbar">Write</div></RouterLink>
           <div id="navs" @click="logout">Log Out</div>
 
+          <!--
           <div id="searchbar">  </div>
           <div id="notification"> </div>
-          <RouterLink to="/settings"><div id="profile-pic"> Update Profile </div></RouterLink>
+          -->
+          <RouterLink to="/settings"><div id="profile-pic"> <Icon icon="iconoir:profile-circle" style='font-size: 20px;'/> </div></RouterLink>
         </div>
       </div>
     </div>
@@ -156,11 +159,14 @@ const logout = async () => {
   {
     display: flex;
     justify-content: flex-end;
+    width: 70%;
     
+    /*
     position: absolute;
     right: 100px;
     bottom: 30px;
     margin: 8px 0px;
+    */
 
   }
 
@@ -195,6 +201,22 @@ const logout = async () => {
     
     z-index: 1;
   }
+}
+
+#profile-pic
+{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50px;
+}
+
+#profile-pic:hover 
+{
+  border: 1px solid;
+  border-color: rgba(162, 0, 255, 0.507);
 }
 </style>
 

@@ -7,7 +7,7 @@
           'Tech' is very broad, but we provide the resources to get you going in the right direction quickly.
         </p>
 
-        <RouterLink to= "/signup"> <div id="signup-btn">Sign Up</div> </RouterLink>
+        <RouterLink to= "/signup"> <div id="signup-btn">Get Started</div> </RouterLink>
       </div>
     </div>
   </div>
